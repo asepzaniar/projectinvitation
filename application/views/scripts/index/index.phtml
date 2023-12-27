@@ -1,0 +1,739 @@
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/series-label.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<script
+  src="https://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+ <style>
+
+	body{
+		background: lightgrey;
+	}
+
+	#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 100%;
+  background-color:white;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.container {
+  padding: 2px 16px;
+}
+.row{
+	margin: 15px !important;
+}
+ </style>
+ <div class="row">
+ <div class="col-md-12">
+	<div class="card">
+	  <div class="row">
+		<div id="q1"></div>
+	</div>
+	  </div>
+</div>
+
+<div class="col-md-4">
+	<div class="card">
+	  <div class="row">
+		<div id="q2"></div>
+	</div>
+	  </div>
+</div>
+
+<div class="col-md-8">
+	<div class="card">
+	  <div class="row">
+		<div id="q3"></div>
+	</div>
+	  </div>
+</div>
+
+<div class="col-md-8">
+	<div class="card">
+	  <div class="row">
+		<div id="q4"></div>
+	</div>
+	  </div>
+</div>
+<div class="col-md-4">
+	<div class="card">
+	  <div class="row">
+		<div id="q5"></div>
+	</div>
+	  </div>
+</div>
+
+<div class="col-md-6">
+	<div class="card">
+	  <div class="row">
+		<div id="q6"></div>
+	</div>
+	  </div>
+</div>
+<div class="col-md-6">
+	<div class="card">
+	  <div class="row">
+		<div id="q7"></div>
+	</div>
+	  </div>
+</div>
+<div class="col-md-12">
+<div class="card">
+	  <div class="row">
+		<table id="customers" class="table" style="width:100%;margin-top: 10px;">
+		<thead>
+			<tr>
+				<th style="text-align:center;">
+					CATEGORY
+				</th>
+				<th style="text-align:center;">
+					SEGMENT
+				</th>
+				<th style="text-align:center;">
+					COUNTRY
+				</th>
+				<th style="text-align:center;">
+					PRODUCT
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php foreach($this->prioritas as $k=>$v){
+				echo'
+					<tr>
+						<td style="text-align:center;">
+							'.$v['category'].'
+						</td>
+						<td style="text-align:center;">
+							'.$v['segment'].'
+						</td>
+						<td style="text-align:center;">
+							'.$v['country'].'
+						</td>
+						<td style="text-align:center;">
+							'.$v['country'].'
+						</td>
+				';
+			}?>
+		</tbody>
+	</table>
+	</div>
+	  </div>
+	
+</div>
+</div>
+
+
+
+<script>
+$( document ).ready(function() {
+    console.log( "ready!" );
+	q1Charts();
+	q2Charts();
+	q3Charts();
+	q4Charts();
+	q5Charts();
+	q6Charts();
+	q7Charts();
+});
+
+
+function q1Charts() {
+		$.ajax({
+			type: "GET",
+			url: '/index/ajaxq1',
+			dataType: 'json',
+			// data: data,
+			beforeSend: function() {
+				// $('#loadingcharts').show();
+				// App.blockUI($('.page-content'));
+			},
+			complete: function() {
+				// $('#loadingcharts').hide();
+				// App.unblockUI($('.page-content'));
+			},
+			success: function(data) {
+				// console.log(data);
+				Highcharts.chart('q1', {
+					chart: {
+							height: 300,
+							backgroundColor: 'transparent'
+						},
+					title: {
+						text: 'Penjualan berdasarkan segmen untuk setiap Bulan',
+						align: 'left'
+					},
+
+					subtitle: {
+						text: 'query 1 (q1)',
+						align: 'left'
+					},
+
+					yAxis: {
+						title: {
+							text: 'Number of Employees'
+						}
+					},
+
+				   xAxis: {
+						categories: data.segment,
+						accessibility: {
+							description: 'Months of the year'
+						}
+					},
+
+					legend: {
+						layout: 'vertical',
+						align: 'right',
+						verticalAlign: 'middle'
+					},
+
+					series: [{
+						name: 'Total Sales',
+						data: data.totalsales
+					}],
+					credits: {
+						enabled: false
+					},
+					exporting: {
+						enabled: false
+					},
+
+					responsive: {
+						rules: [{
+							condition: {
+								maxWidth: 500
+							},
+							chartOptions: {
+								legend: {
+									layout: 'horizontal',
+									align: 'center',
+									verticalAlign: 'bottom'
+								}
+							}
+						}]
+					}
+
+				});
+			}
+		});
+
+	}
+	
+	
+	function q2Charts() {
+		$.ajax({
+			type: "GET",
+			url: '/index/ajaxq2',
+			dataType: 'json',
+			// data: data,
+			beforeSend: function() {
+				// $('#loadingcharts').show();
+				// App.blockUI($('.page-content'));
+			},
+			complete: function() {
+				// $('#loadingcharts').hide();
+				// App.unblockUI($('.page-content'));
+			},
+			success: function(data) {
+				// console.log(data);
+				Highcharts.chart('q2', {
+					chart: {
+						type: 'pie',
+						height:300
+					},
+					title: {
+						text: 'Jumlah unit yang terjual berdasarkan produk'
+					},
+					tooltip: {
+						valueSuffix: '%'
+					},
+					subtitle: {
+						text:
+						'query q2'
+					},
+					credits: {
+						enabled: false
+					},
+					exporting: {
+						enabled: false
+					},
+					plotOptions: {
+						series: {
+							allowPointSelect: true,
+							cursor: 'pointer',
+							dataLabels: [{
+								enabled: false,
+								distance: 20
+							}, {
+								enabled: true,
+								distance: -40,
+								format: '{point.percentage:.1f}%',
+								style: {
+									fontSize: '1.2em',
+									textOutline: 'none',
+									opacity: 0.7
+								},
+								filter: {
+									operator: '>',
+									property: 'percentage',
+									value: 10
+								}
+							}]
+						}
+					},
+					series: [
+						{
+							name: 'Percentage',
+							colorByPoint: true,
+							data: [
+								{
+									name: data[0].product,
+									y: data[0].unit_total
+								},{
+									name: data[1].product,
+									y: data[1].unit_total
+								},{
+									name: data[2].product,
+									y: data[2].unit_total
+								}
+							]
+						}
+					]
+				});
+
+			}
+		});
+
+	}
+	
+	
+function q3Charts() {
+		$.ajax({
+			type: "GET",
+			url: '/index/ajaxq3',
+			dataType: 'json',
+			// data: data,
+			beforeSend: function() {
+				// $('#loadingcharts').show();
+				// App.blockUI($('.page-content'));
+			},
+			complete: function() {
+				// $('#loadingcharts').hide();
+				// App.unblockUI($('.page-content'));
+			},
+			success: function(data) {
+				// console.log(data);
+				Highcharts.chart('q3', {
+					chart: {
+						type: 'column',
+						height:300
+					},
+					title: {
+						text: 'Penjualan berdasarkan negara dalam nilai produk',
+						align: 'left'
+					},
+					subtitle: {
+						text:
+							'query 3 (q3)',
+						align: 'left'
+					},
+					credits: {
+						enabled: false
+					},
+					exporting: {
+						enabled: false
+					},
+					xAxis: {
+						categories: data.country,
+						crosshair: true,
+						accessibility: {
+							description: 'Countries'
+						}
+					},
+					yAxis: {
+						min: 0,
+						title: {
+							text: '1000 metric tons (MT)'
+						}
+					},
+					tooltip: {
+						valueSuffix: ' (1000 MT)'
+					},
+					plotOptions: {
+						column: {
+							pointPadding: 0.2,
+							borderWidth: 0
+						}
+					},
+					series: [
+						{
+							name: 'Total Sales',
+							data: data.totalsales
+						}
+					]
+				});
+
+
+
+			}
+		});
+
+	}
+function q4Charts() {
+		$.ajax({
+			type: "GET",
+			url: '/index/ajaxq4',
+			dataType: 'json',
+			// data: data,
+			beforeSend: function() {
+				// $('#loadingcharts').show();
+				// App.blockUI($('.page-content'));
+			},
+			complete: function() {
+				// $('#loadingcharts').hide();
+				// App.unblockUI($('.page-content'));
+			},
+			success: function(data) {
+				// console.log(data);
+				Highcharts.chart('q4', {
+					chart: {
+							height: 300
+						},
+					title: {
+						
+						text: 'Total penjualan berdasarkan Bulan dan segmen',
+						align: 'left'
+					},
+
+					subtitle: {
+						text: 'query 4 (q4)',
+						align: 'left'
+					},
+					credits: {
+						enabled: false
+					},
+					exporting: {
+						enabled: false
+					},
+					yAxis: {
+						title: {
+							text: ''
+						}
+					},
+
+				   xAxis: {
+						categories: data.segment,
+						accessibility: {
+							description: ''
+						}
+					},
+
+					legend: {
+						layout: 'vertical',
+						align: 'right',
+						verticalAlign: 'middle'
+					},
+
+					series: [{
+						name: 'Total Sales',
+						data: data.totalsales
+					}],
+
+					responsive: {
+						rules: [{
+							condition: {
+								maxWidth: 500
+							},
+							chartOptions: {
+								legend: {
+									layout: 'horizontal',
+									align: 'center',
+									verticalAlign: 'bottom'
+								}
+							}
+						}]
+					}
+
+				});
+			}
+		});
+
+	}
+	
+	function q5Charts() {
+		$.ajax({
+			type: "GET",
+			url: '/index/ajaxq5',
+			dataType: 'json',
+			// data: data,
+			beforeSend: function() {
+				// $('#loadingcharts').show();
+				// App.blockUI($('.page-content'));
+			},
+			complete: function() {
+				// $('#loadingcharts').hide();
+				// App.unblockUI($('.page-content'));
+			},
+			success: function(data) {
+				// console.log(data);
+				Highcharts.chart('q5', {
+					chart: {
+						type: 'pie',
+						height:300
+					},
+					title: {
+						text: 'Keuntungan produk berdasarkan segmen'
+					},
+					tooltip: {
+						valueSuffix: '%'
+					},
+					subtitle: {
+						text:
+						'query q5'
+					},
+					credits: {
+						enabled: false
+					},
+					exporting: {
+						enabled: false
+					},
+					plotOptions: {
+						series: {
+							allowPointSelect: true,
+							cursor: 'pointer',
+							dataLabels: [{
+								enabled: false,
+								distance: 20
+							}, {
+								enabled: true,
+								distance: -40,
+								format: '{point.percentage:.1f}%',
+								style: {
+									fontSize: '1.2em',
+									textOutline: 'none',
+									opacity: 0.7
+								},
+								filter: {
+									operator: '>',
+									property: 'percentage',
+									value: 10
+								}
+							}]
+						}
+					},
+					series: [
+						{
+							name: 'Percentage',
+							colorByPoint: true,
+							data: [
+								{
+									name: data[0].segment,
+									y: +data[0].keuntungan
+								},{
+									name: data[1].segment,
+									y: +data[1].keuntungan
+								},{
+									name: data[2].segment,
+									y: +data[2].keuntungan
+								},{
+									name: data[3].segment,
+									y: +data[3].keuntungan
+								},{
+									name: data[4].segment,
+									y: +data[4].keuntungan
+								}
+							]
+						}
+					]
+				});
+
+			}
+		});
+
+	}
+	
+	function q6Charts() {
+		$.ajax({
+			type: "GET",
+			url: '/index/ajaxq6',
+			dataType: 'json',
+			// data: data,
+			beforeSend: function() {
+				// $('#loadingcharts').show();
+				// App.blockUI($('.page-content'));
+			},
+			complete: function() {
+				// $('#loadingcharts').hide();
+				// App.unblockUI($('.page-content'));
+			},
+			success: function(data) {
+				console.log(data);
+				Highcharts.chart('q6', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Penjualan 2022 dan 2023 berdasarkan Bulan',
+        align: 'left'
+    },
+    subtitle: {
+        text:
+            'query 6 (q6)',
+        align: 'left'
+    },
+		credits: {
+			enabled: false
+		},
+		exporting: {
+			enabled: false
+		},
+    xAxis: {
+        categories: data.month_name,
+        crosshair: true,
+        accessibility: {
+            description: 'Countries'
+        }
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: '1000 metric tons (MT)'
+        }
+    },
+    tooltip: {
+        valueSuffix: ' (1000 MT)'
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+    series: [
+        {
+            name: 'Current',
+            data: data.current
+        },
+        {
+            name: 'Prev Year',
+            data: data.prevyear
+        }
+    ]
+});
+
+
+			}
+		});
+
+	}
+	
+	
+function q7Charts() {
+		$.ajax({
+			type: "GET",
+			url: '/index/ajaxq7',
+			dataType: 'json',
+			// data: data,
+			beforeSend: function() {
+				// $('#loadingcharts').show();
+				// App.blockUI($('.page-content'));
+			},
+			complete: function() {
+				// $('#loadingcharts').hide();
+				// App.unblockUI($('.page-content'));
+			},
+			success: function(data) {
+				console.log(data);
+				Highcharts.chart('q7', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Penjualan tahun 2022 dan 2023 berdasarkan produk',
+        align: 'left'
+    },
+    subtitle: {
+        text:
+            'query 7 (q7)',
+        align: 'left'
+    },
+		credits: {
+			enabled: false
+		},
+		exporting: {
+			enabled: false
+		},
+    xAxis: {
+        categories: data.product,
+        crosshair: true,
+        accessibility: {
+            description: 'Countries'
+        }
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: '1000 metric tons (MT)'
+        }
+    },
+    tooltip: {
+        valueSuffix: ' (1000 MT)'
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+    series: [
+        {
+            name: 'Current',
+            data: data.current
+        },
+        {
+            name: 'Prev Year',
+            data: data.prevyear
+        }
+    ]
+});
+
+
+			}
+		});
+
+	}
+
+</script>

@@ -8,7 +8,9 @@
   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
   crossorigin="anonymous"></script>
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+   <link rel="stylesheet" href="/plugins/css/header-sticky.css">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  
  
  <div class="row">
  	<div class="header">
@@ -22,10 +24,22 @@
 
 <script>
 $( document ).ready(function() {
-    console.log( "ready!" );
+    // console.log( "ready!" );
+	var shrinkHeader = 300;
+  $(window).scroll(function() {
+    var scroll = getCurrentScroll();
+      if ( scroll >= shrinkHeader ) {
+           $('.header').addClass('shrink');
+        }
+        else {
+            $('.header').removeClass('shrink');
+        }
+  });
 	
 });
 
-
+function getCurrentScroll() {
+    return window.pageYOffset || document.documentElement.scrollTop;
+    }
 
 </script>

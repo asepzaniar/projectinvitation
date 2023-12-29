@@ -120,22 +120,15 @@ header nav {
   line-height: 60px;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.1);
+  font-family: 'Ubuntu', sans-serif;
 }
 header nav a {
   color: #fff;
   display: inline-block;
-  padding: 10px 15px;
   line-height: 1;
-  text-decoration: none;
-  -moz-border-radius: 2px;
-  -webkit-border-radius: 2px;
   border-radius: 2px;
 }
-header nav a:hover {
-  -moz-box-shadow: 0 0 0 1px #fff;
-  -webkit-box-shadow: 0 0 0 1px #fff;
-  box-shadow: 0 0 0 1px #fff;
-}
+
 
 h2 {
   font-size: 34px;
@@ -157,8 +150,7 @@ p {
 }
 
 section {
-  padding: 20px;
-  margin-bottom: 40px;
+  /* padding: 20px; */  
   background-color: #fff;
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
@@ -190,3 +182,87 @@ body.sticky-header header small {
     -webkit-transform: scale(0, 0);
     transform: scale(0, 0);
   }
+
+
+  
+.nav-8{
+  background:#2E71CC;
+}
+
+.nav-8 .linktext{
+  font-size:1.3em;
+  text-align:center;
+  position:relative;
+  z-index:2;
+  color:#85B9FF;
+  text-decoration:none;
+  font-family: 'Ubuntu', sans-serif;
+  text-transform:uppercase;
+  transition:0.3s ease-in-out;
+  -webkit-transition:0.3s ease-in-out;
+  transition-delay:0s;
+  -webkit-transition-delay:0s;
+}
+.nav-8 .linktext:before, .nav-8 .linktext:after{
+  opacity:0;
+  position:absolute;
+  top:4px;
+  transform:translateY(36px);
+  -webkit-transform:translateY(36px);
+  left:0px;
+  width:100%;
+  transition:0.3s ease-in-out;
+  -webkit-transition:0.3s ease-in-out;
+  font-size:0.5em;
+}
+.nav-8 .linktext:before{
+  content:'';
+  height:0px;
+  background:#236CCF;
+  transition-delay:0s;
+  -webkit-transition-delay:0s;
+}
+.nav-8 .linktext:after{
+  content:attr(data-text);
+  color:#85B9FF;
+  transition-delay:0s;
+  -webkit-transition-delay:0s;
+}
+.nav-8 .item{
+  position:relative;
+  display:inline-block;
+  height:35px;
+  padding-top:15px;
+  margin-left:25px;
+  margin-right:25px;
+  margin-bottom:25px;
+  background:transparent;
+  transition:0.3s ease-in-out;
+  -webkit-transition:0.3s ease-in-out;
+  z-index:2;
+  color:#007BFF;
+  text-decoration:none;
+  font-family: 'Ubuntu', sans-serif;
+  text-transform:uppercase;
+  transition:0.3s ease-in-out;
+  -webkit-transition:0.3s ease-in-out;
+}
+.nav-8 .item:hover .linktext{
+  transform:scale(1.3);
+  -webkit-transform:scale(1.3);
+}
+.nav-8 .item:hover .linktext:before{
+  transition-delay:0s;
+  -webkit-transition-delay:0s;
+}
+.nav-8 .item:hover .linktext:after{
+  transition-delay:0.15s;
+  -webkit-transition-delay:0.15s;
+}
+.nav-8 .item:hover .linktext:before, .nav-8 .item:hover .linktext:after{
+  transform:translateY(16px);
+  -webkit-transform:translateY(16px);
+  opacity:1;
+}
+
+/*   /NAV-8   */

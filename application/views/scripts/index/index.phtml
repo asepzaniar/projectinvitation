@@ -9,6 +9,8 @@
   crossorigin="anonymous"></script>
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
    <link rel="stylesheet" href="/plugins/css/header-sticky.css">
+   <link rel="stylesheet" href="/plugins/css/animate-css.css">
+   <link rel="stylesheet" href="/plugins/css/main.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,10 +23,10 @@
     <a class="anchor" name="nav-8"></a>
     <section class="nav-8">
       <nav>
-        <a class="item" href="#">
+        <a class="item" href="#" onclick="clickNavheader(this);" id="home">
           <div data-text="Main page" class="linktext">Home</div>
         </a>
-        <a class="item" href="#">
+        <a class="item" href="#" onclick="clickNavheader(this);" id="about">
           <div data-text="What we do" class="linktext">About</div>
         </a>
         <a class="item" href="#">
@@ -39,33 +41,9 @@
       </nav>
     </section>
   </header>
-  <div class="wrapper">
-    <section id='steezy'>
-      <h2> ALFAMART</h2> 
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum enim sunt delectus, reiciendis omnis laudantium animi, et nulla quidem, aliquam aliquid. A consectetur deleniti voluptates eius neque, voluptate voluptatibus nostrum! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex libero cupiditate deserunt earum, fuga, ab labore esse animi, nihil est tenetur non delectus perferendis. Maxime accusamus ea rem sint at!</p>
+  
+  <div id="content"></div>
 
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum enim sunt delectus, reiciendis omnis laudantium animi, et nulla quidem, aliquam aliquid. A consectetur deleniti voluptates eius neque, voluptate voluptatibus nostrum! Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ut aspernatur omnis neque iusto. Veritatis rem ad atque optio perferendis. Dolorum qui consequatur, repellat soluta impedit porro totam molestiae sit.</p>
-
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum enim sunt delectus, reiciendis omnis laudantium animi, et nulla quidem, aliquam aliquid. A consectetur deleniti voluptates eius neque, voluptate voluptatibus nostrum! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus iusto, omnis quas, rem minus cupiditate, sunt voluptates minima sint nemo ipsa itaque consequatur dolor, quam necessitatibus vitae. Quod, eaque, quam.</p>
-
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum enim sunt delectus, reiciendis omnis laudantium animi, et nulla quidem, aliquam aliquid. A consectetur deleniti voluptates eius neque, voluptate voluptatibus nostrum!</p>
-
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum enim sunt delectus, reiciendis omnis laudantium animi, et nulla quidem, aliquam aliquid. A consectetur deleniti voluptates eius neque, voluptate voluptatibus nostrum!</p>
-    </section>
-
-    <section id='real'>
-      <h2> Keepin' it real</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum enim sunt delectus, reiciendis omnis laudantium animi, et nulla quidem, aliquam aliquid. A consectetur deleniti voluptates eius neque, voluptate voluptatibus nostrum!</p>
-
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum enim sunt delectus, reiciendis omnis laudantium animi, et nulla quidem, aliquam aliquid. A consectetur deleniti voluptates eius neque, voluptate voluptatibus nostrum!</p>
-
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum enim sunt delectus, reiciendis omnis laudantium animi, et nulla quidem, aliquam aliquid. A consectetur deleniti voluptates eius neque, voluptate voluptatibus nostrum!</p>
-
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum enim sunt delectus, reiciendis omnis laudantium animi, et nulla quidem, aliquam aliquid. A consectetur deleniti voluptates eius neque, voluptate voluptatibus nostrum!</p>
-
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum enim sunt delectus, reiciendis omnis laudantium animi, et nulla quidem, aliquam aliquid. A consectetur deleniti voluptates eius neque, voluptate voluptatibus nostrum!</p>
-
-    </section> 
   </div>
 </body>
 
@@ -76,7 +54,9 @@
 
 <script>
 $( document ).ready(function() {
-    // console.log( "ready!" );
+
+  getmenuhome();
+     console.log( "ready!" );
 	$(window).scroll(function(){
 		var winTop = $(window).scrollTop();
 		if(winTop >= 30){
@@ -86,9 +66,48 @@ $( document ).ready(function() {
 		}
 	});
 
-  
-		
 	});
+
+
+
+  function getmenuhome(){
+    $.ajax({
+        url: "/index/indexhome",
+        type: 'GET',
+        // dataType: 'json', // added data type
+        success: function(res) {
+            // console.log(res);
+            $('#content').html(res);
+            // alert(res);
+        }
+    });
+  }
+
+  function clickNavheader(data){
+    // console.log(data.id);
+    if(data.id == 'home'){
+        $.ajax({
+          url: "/index/indexhome",
+          type: 'GET',
+          // dataType: 'json', // added data type
+          success: function(res) {
+              // console.log(res);
+              $('#content').html(res);
+              // alert(res);
+          }
+      });
+    }else if(data.id == 'about'){
+      $.ajax({
+          url: "/index/indexhome",
+          type: 'GET',
+          // dataType: 'json', // added data type
+          success: function(res) {
+              // console.log(res);
+              $('#content').html(res);
+              // alert(res);
+          }
+    }
+  }
 
 
 </script>

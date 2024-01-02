@@ -79,6 +79,7 @@ header {
   text-align: center;
   position: relative;
   position: fixed;
+  z-index: 99;
   top: 0;
   overflow: hidden;
   -moz-transition: all 0.5s ease;
@@ -184,7 +185,7 @@ body.sticky-header header small {
   }
 
 
-  
+
 .nav-8{
   background:#2E71CC;
 }
@@ -266,3 +267,4 @@ body.sticky-header header small {
 }
 
 /*   /NAV-8   */
+

@@ -89,7 +89,6 @@ $( document ).ready(function() {
         $.ajax({
           url: "/index/indexhome",
           type: 'GET',
-          // dataType: 'json', // added data type
           success: function(res) {
               // console.log(res);
               $('#content').html(res);
@@ -100,7 +99,7 @@ $( document ).ready(function() {
       $.ajax({
           url: "/index/indexhome",
           type: 'GET',
-          // dataType: 'json', // added data type
+         
           success: function(res) {
               // console.log(res);
               $('#content').html(res);

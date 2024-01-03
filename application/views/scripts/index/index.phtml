@@ -15,7 +15,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
- 
+<title>Undanganku!</title>
+  <link rel="icon" type="image/x-icon" href="/img/birdblue.ico">
  <div class="row-me">
  <header>
     <h1>WELCOME PROSPECTIVE BRIDES!</h1>
@@ -89,6 +90,7 @@ $( document ).ready(function() {
         $.ajax({
           url: "/index/indexhome",
           type: 'GET',
+          // dataType: 'json', // added data type
           success: function(res) {
               // console.log(res);
               $('#content').html(res);
@@ -97,14 +99,15 @@ $( document ).ready(function() {
       });
     }else if(data.id == 'about'){
       $.ajax({
-          url: "/index/indexhome",
+          url: "/index/indexabout",
           type: 'GET',
-         
+          // dataType: 'json', // added data type
           success: function(res) {
               // console.log(res);
               $('#content').html(res);
               // alert(res);
           }
+      });
     }
   }
 

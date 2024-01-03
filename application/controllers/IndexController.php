@@ -18,6 +18,13 @@ class IndexController extends Zend_Controller_Action
 		//  $this->_helper->layout->disableLayout();
     }
 
+	public function indexaboutAction()
+    {
+		// die('a');
+        /* Initialize action controller here */
+		//  $this->_helper->layout->disableLayout();
+    }
+
     public function indexAction()
     {
         // action body

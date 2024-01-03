@@ -11,6 +11,7 @@
    <link rel="stylesheet" href="/plugins/css/header-sticky.css">
    <link rel="stylesheet" href="/plugins/css/animate-css.css">
    <link rel="stylesheet" href="/plugins/css/main.css">
+   <link rel="stylesheet" href="/plugins/css/about-css.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -43,12 +44,23 @@
     </section>
   </header>
   
-  <div id="content"></div>
-
+  <div id="content" style="position: relative;bottom: 30px;"></div>
+  <audio src="audio/my-love-medium.mp3" controls loop style="display:none;"></audio>
+  </div>
+  <div class="footer">
+    <div class="col-md-12">
+        <label class="label-footer">Visit Us!</label>
+    </div>
+    <div class="col-md-12">
+      <a href="#"><img src="/img/x.png" class="img-footer" title="X"></a>&nbsp;&nbsp;&nbsp;
+      <a href="#"><img src="/img/fb.png" class="img-footer" title="Facebook"></a>&nbsp;&nbsp;&nbsp;
+      <a href="#"><img src="/img/instagram.png" class="img-footer" title="Instagram"></a>&nbsp;&nbsp;&nbsp;
+    </div>
+  
   </div>
 </body>
 
-<audio src="audio/my-love-medium.mp3" controls loop style="display:none;"></audio>
+
 </div>
 
 
@@ -75,12 +87,18 @@ $( document ).ready(function() {
     $.ajax({
         url: "/index/indexhome",
         type: 'GET',
+        beforeSend: function() {
+             $('#content').addClass('blur');
+          },
         // dataType: 'json', // added data type
         success: function(res) {
             // console.log(res);
             $('#content').html(res);
             // alert(res);
-        }
+        },
+        complete: function() {
+            $('#content').removeClass('blur');
+          }
     });
   }
 
@@ -90,22 +108,34 @@ $( document ).ready(function() {
         $.ajax({
           url: "/index/indexhome",
           type: 'GET',
+          beforeSend: function() {
+             $('#content').addClass('blur');
+          },
           // dataType: 'json', // added data type
           success: function(res) {
               // console.log(res);
               $('#content').html(res);
               // alert(res);
+          },
+          complete: function() {
+            $('#content').removeClass('blur');
           }
       });
     }else if(data.id == 'about'){
       $.ajax({
           url: "/index/indexabout",
           type: 'GET',
+          beforeSend: function() {
+             $('#content').addClass('blur');
+          },
           // dataType: 'json', // added data type
           success: function(res) {
               // console.log(res);
               $('#content').html(res);
               // alert(res);
+          },
+          complete: function() {
+            $('#content').removeClass('blur');
           }
       });
     }

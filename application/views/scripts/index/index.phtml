@@ -1,0 +1,145 @@
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/series-label.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<script
+  src="https://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+   <link rel="stylesheet" href="/plugins/css/header-sticky.css">
+   <link rel="stylesheet" href="/plugins/css/animate-css.css">
+   <link rel="stylesheet" href="/plugins/css/main.css">
+   <link rel="stylesheet" href="/plugins/css/about-css.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+<title>Undanganku!</title>
+  <link rel="icon" type="image/x-icon" href="/img/birdblue.ico">
+ <div class="row-me">
+ <header>
+    <h1>WELCOME PROSPECTIVE BRIDES!</h1>
+    <small>silahkan pilih kategori invitation yang kamu suka!</small>
+    <a class="anchor" name="nav-8"></a>
+    <section class="nav-8">
+      <nav>
+        <a class="item" href="#" onclick="clickNavheader(this);" id="home">
+          <div data-text="Main page" class="linktext">Home</div>
+        </a>
+        <a class="item" href="#" onclick="clickNavheader(this);" id="about">
+          <div data-text="What we do" class="linktext">About</div>
+        </a>
+        <a class="item" href="#">
+          <div data-text="See our works" class="linktext">Portfolio</div>
+        </a>
+        <a class="item" href="#">
+          <div data-text="Get in touch" class="linktext">Contact</div>
+        </a>
+        <a class="item" href="#">
+          <div data-text="Thoughts" class="linktext">Blog</div>
+        </a>
+      </nav>
+    </section>
+  </header>
+  
+  <div id="content" style="position: relative;bottom: 30px;"></div>
+  <audio src="audio/my-love-medium.mp3" controls loop style="display:none;"></audio>
+  </div>
+  <div class="footer">
+    <div class="col-md-12">
+        <label class="label-footer">Visit Us!</label>
+    </div>
+    <div class="col-md-12">
+      <a href="#"><img src="/img/x.png" class="img-footer" title="X"></a>&nbsp;&nbsp;&nbsp;
+      <a href="#"><img src="/img/fb.png" class="img-footer" title="Facebook"></a>&nbsp;&nbsp;&nbsp;
+      <a href="#"><img src="/img/instagram.png" class="img-footer" title="Instagram"></a>&nbsp;&nbsp;&nbsp;
+    </div>
+  
+  </div>
+</body>
+
+
+</div>
+
+
+
+<script>
+$( document ).ready(function() {
+
+  getmenuhome();
+     console.log( "ready!" );
+	$(window).scroll(function(){
+		var winTop = $(window).scrollTop();
+		if(winTop >= 30){
+		$("body").addClass("sticky-header");
+		}else{
+		$("body").removeClass("sticky-header");
+		}
+	});
+
+	});
+
+
+
+  function getmenuhome(){
+    $.ajax({
+        url: "/index/indexhome",
+        type: 'GET',
+        beforeSend: function() {
+             $('#content').addClass('blur');
+          },
+        // dataType: 'json', // added data type
+        success: function(res) {
+            // console.log(res);
+            $('#content').html(res);
+            // alert(res);
+        },
+        complete: function() {
+            $('#content').removeClass('blur');
+          }
+    });
+  }
+
+  function clickNavheader(data){
+    // console.log(data.id);
+    if(data.id == 'home'){
+        $.ajax({
+          url: "/index/indexhome",
+          type: 'GET',
+          beforeSend: function() {
+             $('#content').addClass('blur');
+          },
+          // dataType: 'json', // added data type
+          success: function(res) {
+              // console.log(res);
+              $('#content').html(res);
+              // alert(res);
+          },
+          complete: function() {
+            $('#content').removeClass('blur');
+          }
+      });
+    }else if(data.id == 'about'){
+      $.ajax({
+          url: "/index/indexabout",
+          type: 'GET',
+          beforeSend: function() {
+             $('#content').addClass('blur');
+          },
+          // dataType: 'json', // added data type
+          success: function(res) {
+              // console.log(res);
+              $('#content').html(res);
+              // alert(res);
+          },
+          complete: function() {
+            $('#content').removeClass('blur');
+          }
+      });
+    }
+  }
+
+
+</script>
